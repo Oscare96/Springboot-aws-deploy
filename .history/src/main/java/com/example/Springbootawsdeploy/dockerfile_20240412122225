@@ -1,0 +1,17 @@
+# Use Eclipse Temurin 17 JDK on Alpine Linux as the base image
+FROM eclipse-temurin:17-jdk-alpine
+
+# Install curl utility
+RUN apk add --no-cache curl
+
+# Set a volume mount point for temporary data
+VOLUME /tmp
+
+# Expose port 8080
+EXPOSE 8080
+
+# Copy the packaged JAR file into the container at the specified working directory
+ADD target/Springboot-aws-deploy-service.jar Springboot-aws-deploy-service.jar
+
+# Set the entry point for the container to run the application
+ENTRYPOINT ["java", "-jar", "/Springboot-aws-deploy-service.jar"]
